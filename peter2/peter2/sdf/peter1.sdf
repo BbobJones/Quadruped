@@ -1,0 +1,1371 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sdf version='1.11'>
+  <model name='peter1' canonical_link = 'body'>
+
+    <frame name="lidar_frame" attached_to='body'>
+          <pose>0 0 0.15 0 0 3.1415926535</pose>
+    </frame>
+
+    <frame name="camera_frame" attached_to='body'>
+          <pose>0 0 0.05 0 0 3.1415926</pose>
+    </frame>
+
+    <link name='body'>
+      <inertial>
+        <pose>0.0022555536637576899 0.00133065518558914 0.043064731379226201 0 0 0</pose>
+        <mass>0.063478029760084195</mass>
+        <inertia>
+          <ixx>7.9230379603712002e-05</ixx>
+          <ixy>2.9482940315218001e-07</ixy>
+          <ixz>-1.20685983267543e-08</ixz>
+          <iyy>7.1253492093192099e-05</iyy>
+          <iyz>1.2420643100907299e-08</iyz>
+          <izz>0.00014631818171768199</izz>
+        </inertia>
+      </inertial>
+      <collision name='body_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://description/meshes/body.STL</uri>
+          </mesh>
+        </geometry>
+          <surface>
+            <friction>  
+              <ode>
+               <mu>1</mu>
+               <mu2>1</mu2>
+              </ode>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+      </collision>
+      <visual name='body_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://description/meshes/body.STL</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.995098054 1 1 1</diffuse>
+          <ambient>0.995098054 1 1 1</ambient>
+        </material>
+      </visual>
+
+ <sensor name='gpu_lidar' type='gpu_lidar'>"
+          <pose relative_to='lidar_frame'>0 0 0 0 0 0</pose>
+          <topic>lidar_scan</topic>
+          <update_rate>10</update_rate>
+          <ray>
+              <scan>
+                  <horizontal>
+                      <samples>720</samples>
+                      <resolution>1</resolution>
+                      <min_angle>-0.785</min_angle>
+                      <max_angle>0.785</max_angle>
+                  </horizontal>
+                  <vertical>
+                      <samples>1</samples>
+                      <resolution>0.01</resolution>
+                      <min_angle>0</min_angle>
+                      <max_angle>0</max_angle>
+                  </vertical>
+              </scan>
+              <range>
+                  <min>0.05</min>
+                  <max>10.0</max>
+                  <resolution>0.01</resolution>
+              </range>
+          </ray>
+          <always_on>1</always_on>
+          <visualize>true</visualize>
+      </sensor>
+      <sensor name="boundingbox_camera" type="boundingbox_camera">
+         <pose relative_to='camera_frame'>0 0 0 0 0 0</pose>
+         <topic>boxes</topic>
+         <camera>
+           <box_type>2d</box_type>
+           <horizontal_fov>1.047</horizontal_fov>
+           <image>
+             <width>1280</width>
+             <height>720</height>
+           </image>
+           <clip>
+             <near>0.1</near>
+             <far>10</far>
+           </clip>
+         </camera>
+         <always_on>1</always_on>
+         <update_rate>30</update_rate>
+         <visualize>true</visualize>
+       </sensor>
+
+    </link>
+
+
+    <joint name='jlf1' type='revolute'>
+      <pose relative_to='body'>-0.04 -0.04 0.04 -1.5708 5.5511151231257827e-17 -0.52359999999999995</pose>
+      <parent>body</parent>
+      <child>llf1</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <lower>-3.14</lower>
+          <upper>3.14</upper>
+          <effort>10</effort>
+          <velocity>10</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='llf1'>
+      <pose relative_to='jlf1'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0.00286542457 -0.001117447 -0.027575894 0 0 0</pose>
+        <mass>0.012789728747716301</mass>
+        <inertia>
+          <ixx>2.8085225283823598e-06</ixx>
+          <ixy>-1.22116927896592e-08</ixy>
+          <ixz>-8.7286357197039904e-08</ixz>
+          <iyy>1.9479276383099401e-06</iyy>
+          <iyz>-2.2831986328942301e-08</iyz>
+          <izz>1.8524298404201401e-06</izz>
+        </inertia>
+      </inertial>
+      <collision name='llf1_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://description/meshes/llf1.STL</uri>
+          </mesh>
+        </geometry>
+          <surface>
+            <friction>  
+              <ode>
+               <mu>1</mu>
+               <mu2>1</mu2>
+              </ode>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+      </collision>
+      <visual name='llf1_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://description/meshes/llf1.STL</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.995098054 1 1 1</diffuse>
+          <ambient>0.995098054 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='jlf2' type='revolute'>
+      <pose relative_to='llf1'>0.0022300000000000002 -0.0058999999999999999 -0.0332 0.34907000000000005 2.1175823681357508e-22 3.1415853071795872</pose>
+      <parent>llf1</parent>
+      <child>llf2</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>-3.14</lower>
+          <upper>3.14</upper>
+          <effort>10</effort>
+          <velocity>10</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='llf2'>
+      <pose relative_to='jlf2'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0 3.46944695195361e-18 -0.024259718544271999 0 0 0</pose>
+        <mass>0.0071256681620003801</mass>
+        <inertia>
+          <ixx>1.51184436411063e-06</ixx>
+          <ixy>9.9261673506363302e-22</ixy>
+          <ixz>4.7645603283054403e-22</ixz>
+          <iyy>2.8950464625635802e-06</iyy>
+          <iyz>2.64697796016969e-22</iyz>
+          <izz>1.50597424566293e-06</izz>
+        </inertia>
+      </inertial>
+      <collision name='llf2_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://description/meshes/llf2.STL</uri>
+          </mesh>
+        </geometry>
+          <surface>
+            <friction>  
+              <ode>
+               <mu>1</mu>
+               <mu2>1</mu2>
+              </ode>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+      </collision>
+      <visual name='llf2_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://description/meshes/llf2.STL</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.995098054 1 1 1</diffuse>
+          <ambient>0.995098054 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='jlf3' type='revolute'>
+      <pose relative_to='llf2'>-0.00027 6.2114999999999997e-05 -0.050126999999999998 1.2401 0 0</pose>
+      <parent>llf2</parent>
+      <child>llf3</child>
+      <axis>
+        <xyz>-1 0 0</xyz>
+        <limit>
+          <lower>-3.14</lower>
+          <upper>3.14</upper>
+          <effort>10</effort>
+          <velocity>10</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='llf3'>
+      <pose relative_to='jlf3'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0.00052240477499151299 -0.00014146217495314401 0.0079297542860836193 0 0 0</pose>
+        <mass>0.0099422645031376194</mass>
+        <inertia>
+          <ixx>1.9963726602804399e-06</ixx>
+          <ixy>4.0330485793124704e-09</ixy>
+          <ixz>-4.3733666249029598e-08</ixz>
+          <iyy>2.2864873535189799e-06</iyy>
+          <iyz>-1.38843083458551e-09</iyz>
+          <izz>6.0776447329995005e-07</izz>
+        </inertia>
+      </inertial>
+      <collision name='llf3_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://description/meshes/llf3.STL</uri>
+          </mesh>
+        </geometry>
+          <surface>
+            <friction>  
+              <ode>
+               <mu>1</mu>
+               <mu2>1</mu2>
+              </ode>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+      </collision>
+      <visual name='llf3_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://description/meshes/llf3.STL</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.995098054 1 1 1</diffuse>
+          <ambient>0.995098054 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='jlr1' type='revolute'>
+      <pose relative_to='body'>0.04 0.04 0.04 -1.5708000000000002 -2.7755575615628914e-17 2.6179999999999999</pose>
+      <parent>body</parent>
+      <child>llr1</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <lower>-3.14</lower>
+          <upper>3.14</upper>
+          <effort>10</effort>
+          <velocity>10</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='llr1'>
+      <pose relative_to='jlr1'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0.00286542457 -0.001117447 -0.027575894 0 0 0</pose>
+        <mass>0.0127897287485531</mass>
+        <inertia>
+          <ixx>2.8085225284554198e-06</ixx>
+          <ixy>-1.22116928234475e-08</ixy>
+          <ixz>-8.72863572603713e-08</ixz>
+          <iyy>1.9479276384354398e-06</iyy>
+          <iyz>-2.2831986359843301e-08</iyz>
+          <izz>1.8524298405056999e-06</izz>
+        </inertia>
+      </inertial>
+      <collision name='llr1_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://description/meshes/llr1.STL</uri>
+          </mesh>
+        </geometry>
+          <surface>
+            <friction>  
+              <ode>
+               <mu>1</mu>
+               <mu2>1</mu2>
+              </ode>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+      </collision>
+      <visual name='llr1_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://description/meshes/llr1.STL</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.995098054 1 1 1</diffuse>
+          <ambient>0.995098054 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='jlr2' type='revolute'>
+      <pose relative_to='llr1'>0.0022300000000000002 -0.0058999999999999999 -0.0332 0.34907000000000005 2.1175823681357508e-22 3.1415853071795872</pose>
+      <parent>llr1</parent>
+      <child>llr2</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>-3.14</lower>
+          <upper>3.14</upper>
+          <effort>10</effort>
+          <velocity>10</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='llr2'>
+      <pose relative_to='jlr2'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>-6.9388939039072299e-18 3.46944695195361e-18 -0.024259718544271999 0 0 0</pose>
+        <mass>0.0071256681620003801</mass>
+        <inertia>
+          <ixx>1.51184436411063e-06</ixx>
+          <ixy>7.9409338805090704e-22</ixy>
+          <ixz>-5.2939559203393795e-23</ixz>
+          <iyy>2.8950464625635802e-06</iyy>
+          <iyz>1.8528845721187801e-22</iyz>
+          <izz>1.5059742456629201e-06</izz>
+        </inertia>
+      </inertial>
+      <collision name='llr2_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://description/meshes/llr2.STL</uri>
+          </mesh>
+        </geometry>
+          <surface>
+            <friction>  
+              <ode>
+               <mu>1</mu>
+               <mu2>1</mu2>
+              </ode>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+      </collision>
+      <visual name='llr2_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://description/meshes/llr2.STL</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.995098054 1 1 1</diffuse>
+          <ambient>0.995098054 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='jlr3' type='revolute'>
+      <pose relative_to='llr2'>-0.00044999999999999999 5.9766999999999999e-05 -0.050127999999999999 1.2216999999999998 0 0</pose>
+      <parent>llr2</parent>
+      <child>llr3</child>
+      <axis>
+        <xyz>-1 0 0</xyz>
+        <limit>
+          <lower>-3.14</lower>
+          <upper>3.14</upper>
+          <effort>10</effort>
+          <velocity>10</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='llr3'>
+      <pose relative_to='jlr3'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0.00052240466158130804 -0.000141462048715624 0.0079297542772835093 0 0 0</pose>
+        <mass>0.0099422642876608892</mass>
+        <inertia>
+          <ixx>1.9963727548235902e-06</ixx>
+          <ixy>4.0330423282316097e-09</ixy>
+          <ixz>-4.3733671753696498e-08</ixz>
+          <iyy>2.2864874548568501e-06</iyy>
+          <iyz>-1.3884479500935699e-09</iyz>
+          <izz>6.0776445098594797e-07</izz>
+        </inertia>
+      </inertial>
+      <collision name='llr3_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://description/meshes/llr3.STL</uri>
+          </mesh>
+        </geometry>
+          <surface>
+            <friction>  
+              <ode>
+               <mu>1</mu>
+               <mu2>1</mu2>
+              </ode>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+      </collision>
+      <visual name='llr3_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://description/meshes/llr3.STL</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.995098054 1 1 1</diffuse>
+          <ambient>0.995098054 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='jrf1' type='revolute'>
+      <pose relative_to='body'>-0.04 0.04 0.04 -1.5708 -5.5511151231257827e-17 0.52359999999999995</pose>
+      <parent>body</parent>
+      <child>lrf1</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <lower>-3.14</lower>
+          <upper>3.14</upper>
+          <effort>10</effort>
+          <velocity>10</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='lrf1'>
+      <pose relative_to='jrf1'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0.00286542457 -0.001117447 0.027575894 0 0 0</pose>
+        <mass>0.012789727077819699</mass>
+        <inertia>
+          <ixx>2.8085225922082198e-06</ixx>
+          <ixy>-1.2211785859690101e-08</ixy>
+          <ixz>8.7286419548063804e-08</ixz>
+          <iyy>1.9479275047790999e-06</iyy>
+          <iyz>2.28320672404181e-08</iyz>
+          <izz>1.8524299282918799e-06</izz>
+        </inertia>
+      </inertial>
+      <collision name='lrf1_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://description/meshes/lrf1.STL</uri>
+          </mesh>
+        </geometry>
+          <surface>
+            <friction>  
+              <ode>
+               <mu>1</mu>
+               <mu2>1</mu2>
+              </ode>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+      </collision>
+      <visual name='lrf1_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://description/meshes/lrf1.STL</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.995098054 1 1 1</diffuse>
+          <ambient>0.995098054 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='jrf2' type='revolute'>
+      <pose relative_to='lrf1'>0.0020500000000000002 -0.0058999999999999999 0.0332 2.7925 -2.1175823681357508e-22 3.1415853071795872</pose>
+      <parent>lrf1</parent>
+      <child>lrf2</child>
+      <axis>
+        <xyz>-1 0 0</xyz>
+        <limit>
+          <lower>-3.14</lower>
+          <upper>3.14</upper>
+          <effort>10</effort>
+          <velocity>10</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='lrf2'>
+      <pose relative_to='jrf2'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0 -6.9388939039072299e-18 -0.024259718544271999 0 0 0</pose>
+        <mass>0.0071256681620003896</mass>
+        <inertia>
+          <ixx>1.51184436411063e-06</ixx>
+          <ixy>-3.4410713482205998e-22</ixy>
+          <ixz>1.2705494208814499e-21</ixz>
+          <iyy>2.8950464625635899e-06</iyy>
+          <iyz>-4.2351647362714998e-22</iyz>
+          <izz>1.50597424566293e-06</izz>
+        </inertia>
+      </inertial>
+      <collision name='lrf2_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://description/meshes/lrf2.STL</uri>
+          </mesh>
+        </geometry>
+          <surface>
+            <friction>  
+              <ode>
+               <mu>1</mu>
+               <mu2>1</mu2>
+              </ode>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+      </collision>
+      <visual name='lrf2_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://description/meshes/lrf2.STL</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.995098054 1 1 1</diffuse>
+          <ambient>0.995098054 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='jrf3' type='revolute'>
+      <pose relative_to='lrf2'>-0.00044999999999999999 -5.9766999999999999e-05 -0.050127999999999999 1.9198999999999999 0 0</pose>
+      <parent>lrf2</parent>
+      <child>lrf3</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>-3.14</lower>
+          <upper>3.14</upper>
+          <effort>10</effort>
+          <velocity>10</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='lrf3'>
+      <pose relative_to='jrf3'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0.00052239841423967802 -0.000141459359524615 -0.0079297590963933497 0 0 0</pose>
+        <mass>0.0099422546587472193</mass>
+        <inertia>
+          <ixx>1.9963740226929001e-06</ixx>
+          <ixy>4.0329498722230403e-09</ixy>
+          <ixz>4.3734180051889302e-08</ixz>
+          <iyy>2.28648720039974e-06</iyy>
+          <iyz>1.3881003758252501e-09</iyz>
+          <izz>6.0776469273260595e-07</izz>
+        </inertia>
+      </inertial>
+      <collision name='lrf3_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://description/meshes/lrf3.STL</uri>
+          </mesh>
+        </geometry>
+          <surface>
+            <friction>  
+              <ode>
+               <mu>1</mu>
+               <mu2>1</mu2>
+              </ode>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+      </collision>
+      <visual name='lrf3_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://description/meshes/lrf3.STL</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.995098054 1 1 1</diffuse>
+          <ambient>0.995098054 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='jrr1' type='revolute'>
+      <pose relative_to='body'>0.04 -0.04 0.04 -1.5708000000000002 2.7755575615628914e-17 -2.6179999999999999</pose>
+      <parent>body</parent>
+      <child>lrr1</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <lower>-3.14</lower>
+          <upper>3.14</upper>
+          <effort>10</effort>
+          <velocity>10</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='lrr1'>
+      <pose relative_to='jrr1'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0.00286542457 -0.001117447 0.027575894 0 0 0</pose>
+        <mass>0.012789727077659701</mass>
+        <inertia>
+          <ixx>2.80852259219697e-06</ixx>
+          <ixy>-1.22117858410542e-08</ixy>
+          <ixz>8.7286419553580596e-08</ixz>
+          <iyy>1.94792750477442e-06</iyy>
+          <iyz>2.2832067239878298e-08</iyz>
+          <izz>1.8524299282579899e-06</izz>
+        </inertia>
+      </inertial>
+      <collision name='lrr1_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://description/meshes/lrr1.STL</uri>
+          </mesh>
+        </geometry>
+          <surface>
+            <friction>  
+              <ode>
+               <mu>1</mu>
+               <mu2>1</mu2>
+              </ode>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+      </collision>
+      <visual name='lrr1_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://description/meshes/lrr1.STL</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.995098054 1 1 1</diffuse>
+          <ambient>0.995098054 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='jrr2' type='revolute'>
+      <pose relative_to='lrr1'>0.0020500000000000002 -0.0058999999999999999 0.0332 -2.7925 0 0</pose>
+      <parent>lrr1</parent>
+      <child>lrr2</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>-3.14</lower>
+          <upper>3.14</upper>
+          <effort>10</effort>
+          <velocity>10</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='lrr2'>
+      <pose relative_to='jrr2'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>6.9388939039072299e-18 -6.9388939039072299e-18 -0.024259718544271999 0 0 0</pose>
+        <mass>0.0071256681620003896</mass>
+        <inertia>
+          <ixx>1.51184436411063e-06</ixx>
+          <ixy>-6.3527471044072497e-22</ixy>
+          <ixz>-1.2705494208814499e-21</ixz>
+          <iyy>2.8950464625635899e-06</iyy>
+          <iyz>2.64697796016969e-22</iyz>
+          <izz>1.50597424566293e-06</izz>
+        </inertia>
+      </inertial>
+      <collision name='lrr2_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://description/meshes/lrr2.STL</uri>
+          </mesh>
+        </geometry>
+          <surface>
+            <friction>  
+              <ode>
+               <mu>1</mu>
+               <mu2>1</mu2>
+              </ode>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+      </collision>
+      <visual name='lrr2_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://description/meshes/lrr2.STL</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.995098054 1 1 1</diffuse>
+          <ambient>0.995098054 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+    <joint name='jrr3' type='revolute'>
+      <pose relative_to='lrr2'>0.00044999999999999999 5.9766999999999999e-05 -0.050127999999999999 1.9198999999999999 -4.2351647362715017e-22 3.1415853071795872</pose>
+      <parent>lrr2</parent>
+      <child>lrr3</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>-3.14</lower>
+          <upper>3.14</upper>
+          <effort>10</effort>
+          <velocity>100</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='lrr3'>
+      <pose relative_to='jrr3'>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0.00052239841485524801 -0.00014145935954890099 -0.00792975909575863 0 0 0</pose>
+        <mass>0.0099422546595867908</mass>
+        <inertia>
+          <ixx>1.99637402276075e-06</ixx>
+          <ixy>4.0329498745485196e-09</ixy>
+          <ixz>4.3734179997038598e-08</ixz>
+          <iyy>2.2864872005159102e-06</iyy>
+          <iyz>1.38810037893004e-09</iyz>
+          <izz>6.0776469278123602e-07</izz>
+        </inertia>
+      </inertial>
+      <collision name='lrr3_collision'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://description/meshes/lrr3.STL</uri>
+          </mesh>
+        </geometry>
+          <surface>
+            <friction>  
+              <ode>
+               <mu>1</mu>
+               <mu2>1</mu2>
+              </ode>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+      </collision>
+      <visual name='lrr3_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://description/meshes/lrr3.STL</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.995098054 1 1 1</diffuse>
+          <ambient>0.995098054 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+
+  <joint name='fit1' type='revolute'>
+  <pose relative_to='llf3'>0 0 0.06 0 0 0</pose>
+  <parent>llf3</parent>
+  <child>fitl1</child>
+  <axis>
+    <xyz>1 0 0</xyz>
+    <limit>
+      <lower>-3.14</lower>
+      <upper>3.14</upper>
+      <effort>100</effort>
+      <velocity>1</velocity>
+    </limit>
+    <dynamics>
+      <spring_reference>0</spring_reference>
+      <spring_stiffness>0</spring_stiffness>
+    </dynamics>
+  </axis>
+</joint>
+<link name='fitl1'>
+  <pose relative_to='fit1'>0 0 0 0 0 0</pose>
+  <inertial>
+    <pose>0 0 0 0 0 0</pose>
+    <mass>0.01</mass>
+    <inertia>
+      <ixx>2.083e-06</ixx>
+      <ixy>0.0</ixy>
+      <ixz>0.0</ixz>
+      <iyy>2.083e-06</iyy>
+      <iyz>0.0</iyz>
+      <izz>2.083e-06</izz>
+    </inertia>
+  </inertial>
+  <collision name='fit1_collision'>
+    <pose>0 0 0 0 0 0</pose>
+    <geometry>
+      <box>
+        <size>0.030 0.030 0.005</size>
+      </box>
+    </geometry>
+    <surface>
+      <friction>  
+        <ode>
+          <mu>1</mu>
+          <mu2>1</mu2>
+        </ode>
+      </friction>
+      <bounce/>
+      <contact/>
+    </surface>
+  </collision>
+  <visual name='fit1_visual'>
+    <pose>0 0 0 0 0 0</pose>
+    <geometry>
+      <box>
+        <size>0.030 0.030 0.005</size>
+      </box>
+    </geometry>
+    <material>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <ambient>0.8 0.8 0.8 1</ambient>
+    </material>
+  </visual>
+</link>
+
+<joint name='fit2' type='revolute'>
+  <pose relative_to='lrf3'>0 0 -0.06 0 0 0</pose>
+  <parent>lrf3</parent>
+  <child>fitl2</child>
+  <axis>
+    <xyz>1 0 0</xyz>
+    <limit>
+      <lower>-3.14</lower>
+      <upper>3.14</upper>
+      <effort>100</effort>
+      <velocity>1</velocity>
+    </limit>
+    <dynamics>
+      <spring_reference>0</spring_reference>
+      <spring_stiffness>0</spring_stiffness>
+    </dynamics>
+  </axis>
+</joint>
+<link name='fitl2'>
+  <pose relative_to='fit2'>0 0 0 0 0 0</pose>
+  <inertial>
+    <pose>0 0 0 0 0 0</pose>
+    <mass>0.01</mass>
+    <inertia>
+      <ixx>2.083e-06</ixx>
+      <ixy>0.0</ixy>
+      <ixz>0.0</ixz>
+      <iyy>2.083e-06</iyy>
+      <iyz>0.0</iyz>
+      <izz>2.083e-06</izz>
+    </inertia>
+  </inertial>
+  <collision name='fit2_collision'>
+    <pose>0 0 0 0 0 0</pose>
+    <geometry>
+      <box>
+        <size>0.030 0.030 0.005</size>
+      </box>
+    </geometry>
+    <surface>
+      <friction>  
+        <ode>
+          <mu>1</mu>
+          <mu2>1</mu2>
+        </ode>
+      </friction>
+      <bounce/>
+      <contact/>
+    </surface>
+  </collision>
+  <visual name='fit2_visual'>
+    <pose>0 0 0 0 0 0</pose>
+    <geometry>
+      <box>
+        <size>0.030 0.030 0.005</size>
+      </box>
+    </geometry>
+    <material>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <ambient>0.8 0.8 0.8 1</ambient>
+    </material>
+  </visual>
+</link>
+
+<joint name='fit3' type='revolute'>
+  <pose relative_to='llr3'>0 0 0.06 0 0 0</pose>
+  <parent>llr3</parent>
+  <child>fitl3</child>
+  <axis>
+    <xyz>1 0 0</xyz>
+    <limit>
+      <lower>-3.14</lower>
+      <upper>3.14</upper>
+      <effort>100</effort>
+      <velocity>1</velocity>
+    </limit>
+    <dynamics>
+      <spring_reference>0</spring_reference>
+      <spring_stiffness>0</spring_stiffness>
+    </dynamics>
+  </axis>
+</joint>
+<link name='fitl3'>
+  <pose relative_to='fit3'>0 0 0 0 0 0</pose>
+  <inertial>
+    <pose>0 0 0 0 0 0</pose>
+    <mass>0.01</mass>
+    <inertia>
+      <ixx>2.083e-06</ixx>
+      <ixy>0.0</ixy>
+      <ixz>0.0</ixz>
+      <iyy>2.083e-06</iyy>
+      <iyz>0.0</iyz>
+      <izz>2.083e-06</izz>
+    </inertia>
+  </inertial>
+  <collision name='fit3_collision'>
+    <pose>0 0 0 0 0 0</pose>
+    <geometry>
+      <box>
+        <size>0.030 0.030 0.005</size>
+      </box>
+    </geometry>
+    <surface>
+      <friction>  
+        <ode>
+          <mu>1</mu>
+          <mu2>1</mu2>
+        </ode>
+      </friction>
+      <bounce/>
+      <contact/>
+    </surface>
+  </collision>
+  <visual name='fit3_visual'>
+    <pose>0 0 0 0 0 0</pose>
+    <geometry>
+      <box>
+        <size>0.030 0.030 0.005</size>
+      </box>
+    </geometry>
+    <material>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <ambient>0.8 0.8 0.8 1</ambient>
+    </material>
+  </visual>
+</link>
+
+<joint name='fit4' type='revolute'>
+  <pose relative_to='lrr3'>0 0 -0.06 0 0 0</pose>
+  <parent>lrr3</parent>
+  <child>fitl4</child>
+  <axis>
+    <xyz>1 0 0</xyz>
+    <limit>
+      <lower>-3.14</lower>
+      <upper>3.14</upper>
+      <effort>100</effort>
+      <velocity>1</velocity>
+    </limit>
+    <dynamics>
+      <spring_reference>0</spring_reference>
+      <spring_stiffness>0</spring_stiffness>
+    </dynamics>
+  </axis>
+</joint>
+<link name='fitl4'>
+  <pose relative_to='fit4'>0 0 0 0 0 0</pose>
+  <inertial>
+    <pose>0 0 0 0 0 0</pose>
+    <mass>0.01</mass>
+    <inertia>
+      <ixx>2.083e-06</ixx>
+      <ixy>0.0</ixy>
+      <ixz>0.0</ixz>
+      <iyy>2.083e-06</iyy>
+      <iyz>0.0</iyz>
+      <izz>2.083e-06</izz>
+    </inertia>
+  </inertial>
+  <collision name='fit4_collision'>
+    <pose>0 0 0 0 0 0</pose>
+    <geometry>
+      <box>
+        <size>0.030 0.030 0.005</size>
+      </box>
+    </geometry>
+    <surface>
+      <friction>  
+        <ode>
+          <mu>1</mu>
+          <mu2>1</mu2>
+        </ode>
+      </friction>
+      <bounce/>
+      <contact/>
+    </surface>
+  </collision>
+  <visual name='fit4_visual'>
+    <pose>0 0 0 0 0 0</pose>
+    <geometry>
+      <box>
+        <size>0.030 0.030 0.005</size>
+      </box>
+    </geometry>
+    <material>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <ambient>0.8 0.8 0.8 1</ambient>
+    </material>
+  </visual>
+</link>
+
+
+    <plugin
+      filename="gz-sim-joint-state-publisher-system"
+      name="gz::sim::systems::JointStatePublisher">
+      <joint_name>jlf1</joint_name>
+    </plugin>
+    <plugin
+      filename="gz-sim-joint-state-publisher-system"
+      name="gz::sim::systems::JointStatePublisher">
+      <joint_name>jlf2</joint_name>
+    </plugin>
+        <plugin
+      filename="gz-sim-joint-state-publisher-system"
+      name="gz::sim::systems::JointStatePublisher">
+      <joint_name>jlf3</joint_name>
+      </plugin>
+
+    <plugin
+      filename="gz-sim-joint-state-publisher-system"
+      name="gz::sim::systems::JointStatePublisher">
+      <joint_name>jrf1</joint_name>
+    </plugin>
+    <plugin
+      filename="gz-sim-joint-state-publisher-system"
+      name="gz::sim::systems::JointStatePublisher">
+      <joint_name>jrf2</joint_name>
+    </plugin>
+        <plugin
+      filename="gz-sim-joint-state-publisher-system"
+      name="gz::sim::systems::JointStatePublisher">
+      <joint_name>jrf3</joint_name>
+      </plugin>
+
+    <plugin
+      filename="gz-sim-joint-state-publisher-system"
+      name="gz::sim::systems::JointStatePublisher">
+      <joint_name>jlr1</joint_name>
+    </plugin>
+    <plugin
+      filename="gz-sim-joint-state-publisher-system"
+      name="gz::sim::systems::JointStatePublisher">
+      <joint_name>jlr2</joint_name>
+    </plugin>
+        <plugin
+      filename="gz-sim-joint-state-publisher-system"
+      name="gz::sim::systems::JointStatePublisher">
+      <joint_name>jlr3</joint_name>
+      </plugin>
+
+    <plugin
+      filename="gz-sim-joint-state-publisher-system"
+      name="gz::sim::systems::JointStatePublisher">
+      <joint_name>jrr1</joint_name>
+    </plugin>
+    <plugin
+      filename="gz-sim-joint-state-publisher-system"
+      name="gz::sim::systems::JointStatePublisher">
+      <joint_name>jrr2</joint_name>
+    </plugin>
+        <plugin
+      filename="gz-sim-joint-state-publisher-system"
+      name="gz::sim::systems::JointStatePublisher">
+      <joint_name>jrr3</joint_name>
+      </plugin>
+
+<plugin
+  filename="gz-sim-joint-position-controller-system"
+  name="gz::sim::systems::JointPositionController">
+  <joint_name>jlf1</joint_name>
+  <topic>jlf1_topic</topic>
+  <p_gain>1</p_gain>
+  <i_gain>0.1</i_gain>
+  <d_gain>0.01</d_gain>
+  <i_max>1</i_max>
+  <i_min>-1</i_min>
+  <cmd_max>1000</cmd_max>
+  <cmd_min>-1000</cmd_min>
+</plugin>
+<plugin
+  filename="gz-sim-joint-position-controller-system"
+  name="gz::sim::systems::JointPositionController">
+  <joint_name>jlf2</joint_name>
+  <topic>jlf2_topic</topic>
+  <p_gain>1</p_gain>
+  <i_gain>0.1</i_gain>
+  <d_gain>0.01</d_gain>
+  <i_max>1</i_max>
+  <i_min>-1</i_min>
+  <cmd_max>1000</cmd_max>
+  <cmd_min>-1000</cmd_min>
+</plugin>
+<plugin
+  filename="gz-sim-joint-position-controller-system"
+  name="gz::sim::systems::JointPositionController">
+  <joint_name>jlf3</joint_name>
+  <topic>jlf3_topic</topic>
+  <p_gain>1</p_gain>
+  <i_gain>0.1</i_gain>
+  <d_gain>0.01</d_gain>
+  <i_max>1</i_max>
+  <i_min>-1</i_min>
+  <cmd_max>1000</cmd_max>
+  <cmd_min>-1000</cmd_min>
+</plugin>
+<plugin
+  filename="gz-sim-joint-position-controller-system"
+  name="gz::sim::systems::JointPositionController">
+  <joint_name>jlr1</joint_name>
+  <topic>jlr1_topic</topic>
+  <p_gain>1</p_gain>
+  <i_gain>0.1</i_gain>
+  <d_gain>0.01</d_gain>
+  <i_max>1</i_max>
+  <i_min>-1</i_min>
+  <cmd_max>1000</cmd_max>
+  <cmd_min>-1000</cmd_min>
+</plugin>
+<plugin
+  filename="gz-sim-joint-position-controller-system"
+  name="gz::sim::systems::JointPositionController">
+  <joint_name>jlr2</joint_name>
+  <topic>jlr2_topic</topic>
+  <p_gain>1</p_gain>
+  <i_gain>0.1</i_gain>
+  <d_gain>0.01</d_gain>
+  <i_max>1</i_max>
+  <i_min>-1</i_min>
+  <cmd_max>1000</cmd_max>
+  <cmd_min>-1000</cmd_min>
+</plugin>
+<plugin
+  filename="gz-sim-joint-position-controller-system"
+  name="gz::sim::systems::JointPositionController">
+  <joint_name>jlr3</joint_name>
+  <topic>jlr3_topic</topic>
+  <p_gain>1</p_gain>
+  <i_gain>0.1</i_gain>
+  <d_gain>0.01</d_gain>
+  <i_max>1</i_max>
+  <i_min>-1</i_min>
+  <cmd_max>1000</cmd_max>
+  <cmd_min>-1000</cmd_min>
+</plugin>
+<plugin
+  filename="gz-sim-joint-position-controller-system"
+  name="gz::sim::systems::JointPositionController">
+  <joint_name>jrf1</joint_name>
+  <topic>jrf1_topic</topic>
+  <p_gain>1</p_gain>
+  <i_gain>0.1</i_gain>
+  <d_gain>0.01</d_gain>
+  <i_max>1</i_max>
+  <i_min>-1</i_min>
+  <cmd_max>1000</cmd_max>
+  <cmd_min>-1000</cmd_min>
+</plugin>
+<plugin
+  filename="gz-sim-joint-position-controller-system"
+  name="gz::sim::systems::JointPositionController">
+  <joint_name>jrf2</joint_name>
+  <topic>jrf2_topic</topic>
+  <p_gain>1</p_gain>
+  <i_gain>0.1</i_gain>
+  <d_gain>0.01</d_gain>
+  <i_max>1</i_max>
+  <i_min>-1</i_min>
+  <cmd_max>1000</cmd_max>
+  <cmd_min>-1000</cmd_min>
+</plugin>
+<plugin
+  filename="gz-sim-joint-position-controller-system"
+  name="gz::sim::systems::JointPositionController">
+  <joint_name>jrf3</joint_name>
+  <topic>jrf3_topic</topic>
+  <p_gain>1</p_gain>
+  <i_gain>0.1</i_gain>
+  <d_gain>0.01</d_gain>
+  <i_max>1</i_max>
+  <i_min>-1</i_min>
+  <cmd_max>1000</cmd_max>
+  <cmd_min>-1000</cmd_min>
+</plugin>
+<plugin
+  filename="gz-sim-joint-position-controller-system"
+  name="gz::sim::systems::JointPositionController">
+  <joint_name>jrr1</joint_name>
+  <topic>jrr1_topic</topic>
+  <p_gain>1</p_gain>
+  <i_gain>0.1</i_gain>
+  <d_gain>0.01</d_gain>
+  <i_max>1</i_max>
+  <i_min>-1</i_min>
+  <cmd_max>1000</cmd_max>
+  <cmd_min>-1000</cmd_min>
+</plugin>
+<plugin
+  filename="gz-sim-joint-position-controller-system"
+  name="gz::sim::systems::JointPositionController">
+  <joint_name>jrr2</joint_name>
+  <topic>jrr2_topic</topic>
+  <p_gain>1</p_gain>
+  <i_gain>0.1</i_gain>
+  <d_gain>0.01</d_gain>
+  <i_max>1</i_max>
+  <i_min>-1</i_min>
+  <cmd_max>1000</cmd_max>
+  <cmd_min>-1000</cmd_min>
+</plugin>
+<plugin
+  filename="gz-sim-joint-position-controller-system"
+  name="gz::sim::systems::JointPositionController">
+  <joint_name>jrr3</joint_name>
+  <topic>jrr3_topic</topic>
+  <p_gain>1</p_gain>
+  <i_gain>0.1</i_gain>
+  <d_gain>0.01</d_gain>
+  <i_max>1</i_max>
+  <i_min>-1</i_min>
+  <cmd_max>1000</cmd_max>
+  <cmd_min>-1000</cmd_min>
+</plugin>
+
+
+  </model>
+</sdf>
